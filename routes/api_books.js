@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource-1234');
 });
 
-//
 /******************************** 
 * 
 *********************************/
@@ -24,12 +23,11 @@ router.get('/tasks_index',async function(req, res) {
     try{
         var data = await zrevrangeAsync("sorted-books", 0, -1 );
         var reply_books = await mgetAsync(data);
-        const book_items =  LibBooks.get_books_list(reply_books)
-        // console.log(book_items);
+        const book_items =  LibBooks.string_to_obj(reply_books)
+//console.log(book_items);
         var category_keys = LibBooks.get_category_keys(book_items)
         var reply_category = await mgetAsync(category_keys);
-        var category_items = LibBooks.get_category_items(reply_category)
-        // console.log(category_items);
+        var category_items = LibBooks.string_to_obj(reply_category)
         var ret_items = [];
         book_items.forEach(function(book){
             var name = LibBooks.get_category_name(book.category_id, category_items)

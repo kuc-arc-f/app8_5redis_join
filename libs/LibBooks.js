@@ -1,7 +1,5 @@
+
 //
-
-//const mysql = require('promise-mysql');
-
 export default {
     convert_array:function(get_items){
         var ret = [];
@@ -12,7 +10,7 @@ export default {
         });
         return ret;
     },
-    get_books_list:function(items){
+    string_to_obj:function(items){
         var ret = [];
         items.forEach(function(item){
             var row = JSON.parse(item || '[]')
@@ -20,7 +18,7 @@ export default {
             ret.push( row )
         });
         return ret;        
-    },
+    },    
     get_category_keys: function(items){
         var ret = [];
         items.forEach(function(item){
@@ -28,19 +26,11 @@ export default {
         });
         return ret;
     },
-    get_category_items: function(items){
-        var ret = [];
-        items.forEach(function(item){
-            var row = JSON.parse(item || '[]')
-            ret.push( row )
-        });
-        return ret;
-    },
     get_category_name: function(key, category_items){
         var ret = "";
         category_items.forEach(function(category){
             if(category.id == key){
-    // /            console.log(category.title )
+//            console.log(category.title )
                 ret = category.name;
             }
         });
